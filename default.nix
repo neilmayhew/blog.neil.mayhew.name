@@ -2,7 +2,7 @@
 mkDerivation {
   pname = "blog-neil-mayhew-name";
   version = "0.1.0.0";
-  src = lib.cleanSource ./.;
+  src = lib.sourceFilesBySuffices ./. ["cabal" "hs"];
   isLibrary = false;
   isExecutable = true;
   executableHaskellDepends = [ base hakyll ];
