@@ -32,9 +32,7 @@ jobs:
         nix_path: nixpkgs=channel:nixos-unstable
 
     - name: Build
-      run: |
-        nix-build shell.nix
-        result/bin/site rebuild
+      run: nix-build shell.nix -o _site
 
     - name: Upload artifact
       uses: actions/upload-pages-artifact@v3

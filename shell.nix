@@ -8,8 +8,9 @@ let
                        then pkgs.haskellPackages
                        else pkgs.haskell.packages.${compiler};
 
-  drv = haskellPackages.callPackage ./default.nix {};
+  builder = haskellPackages.callPackage ./default.nix {};
+  site = pkgs.callPackage ./site.nix { inherit builder; };
 
 in
 
-  if pkgs.lib.inNixShell then drv.env else drv
+  if pkgs.lib.inNixShell then builder.env else site
