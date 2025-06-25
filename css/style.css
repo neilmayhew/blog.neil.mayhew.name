@@ -510,6 +510,8 @@ blockquote {
 	margin: 0;
 	overflow: hidden;
 	padding: 0;
+	padding-left: 1em;
+	border-left: 3px solid #a8c8a8;
 }
 
 blockquote cite {
