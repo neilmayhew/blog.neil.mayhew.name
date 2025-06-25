@@ -1,9 +1,16 @@
 ---
-title: About
+title: About Me
 ---
 
-About page for this theme. This is based off the Wordpress [twentyseventeen](https://wordpress.org/themes/twentyseventeen/) theme.
+I'm a senior software engineer, experienced in designing and developing server, desktop and embedded applications on Linux and Mac OS. I enjoy architecting complex systems, developing new algorithms, designing for efficiency/footprint/performance, and planning for code robustness and low maintenance from the outset.
 
-Twenty Seventeen brings your site to life with header video and immersive featured images. With a focus on business sites, it features multiple sections on the front page as well as widgets, navigation and social menus, a logo, and more. Personalize its asymmetrical grid with a custom color scheme and showcase your multimedia content with post formats. Our default theme for 2017 works great in many languages, for any abilities, and on any device.
+I've also led and managed projects for many years. I enjoy bringing out the best in each team member, and creating a team ethos in which the whole is greater than the sum of the parts.
 
+I work on Linux and Mac platforms, using mainly Haskell, C++, Python and XSLT.
 
+To find out more about me, take a look at my profiles on:
+
+* [LinkedIn](https://www.linkedin.com/in/neiljhmayhew)
+* [StackExchange](https://stackexchange.com/users/161097/neil-mayhew)
+* [GitHub](https://github.com/neilmayhew)
+* [GitLab](https://gitlab.com/neil.mayhew)
