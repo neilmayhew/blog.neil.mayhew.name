@@ -1595,7 +1595,7 @@ body.has-header-image .site-title,
 body.has-header-video .site-title,
 body.has-header-image .site-title a,
 body.has-header-video .site-title a {
-	color: #fff;
+	color: #bb575f;
 }
 
 .site-description {
@@ -1607,7 +1607,7 @@ body.has-header-video .site-title a {
 
 body.has-header-image .site-description,
 body.has-header-video .site-description {
-	color: #fff;
+	color: #2f3542;
 	opacity: 0.8;
 }
 
@@ -1687,7 +1687,6 @@ body:not(.title-tagline-hidden) .site-branding-text {
 	height: auto;
 	left: 50%;
 	max-width: 1000%;
-	min-height: 100%;
 	min-width: 100%;
 	min-width: 100vw; /* vw prevents 1px gap on left that 100% has */
 	width: auto;
@@ -1741,7 +1740,7 @@ body:not(.title-tagline-hidden) .site-branding-text {
 	.has-header-video .custom-header-media video,
 	.has-header-video .custom-header-media iframe,
 	.has-header-image:not(.twentyseventeen-front-page):not(.home) .custom-header-media img {
-		height: 100%;
+		height: 25%;
 		left: 0;
 		-o-object-fit: cover;
 		object-fit: cover;
@@ -3703,8 +3702,8 @@ p > object:only-child {
 	.home.blog.has-header-image .custom-header-media,
 	.home.blog.has-header-video .custom-header-media {
 		height: 1200px;
-		height: 100vh;
-		max-height: 100%;
+		height: 25vh;
+		max-height: 25%;
 		overflow: hidden;
 	}
 
