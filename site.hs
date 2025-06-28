@@ -1,7 +1,6 @@
 --------------------------------------------------------------------------------
 {-# LANGUAGE OverloadedStrings #-}
 
-import Data.Monoid (mappend)
 import Hakyll
 
 --------------------------------------------------------------------------------
@@ -19,9 +18,11 @@ main = hakyll $ do
     route $ setExtension "html"
     compile $ do
       let pageCtx =
-            field "recent_posts" (const recentPostList)
-              `mappend` field "all_pages" (const allPagesList)
-              `mappend` postCtx
+            mconcat
+              [ field "recent_posts" (const recentPostList)
+              , field "all_pages" (const allPagesList)
+              , postCtx
+              ]
 
       pandocCompiler
         >>= loadAndApplyTemplate "templates/post.html" postCtx
@@ -32,11 +33,13 @@ main = hakyll $ do
     route $ setExtension "html"
     compile $ do
       let pagesCtx =
-            field "recent_posts" (const recentPostList)
-              `mappend` field "all_pages" (const allPagesList)
-              `mappend` constField "title" blogTitle
-              `mappend` constField "site_desc" siteDesc
-              `mappend` defaultContext
+            mconcat
+              [ field "recent_posts" (const recentPostList)
+              , field "all_pages" (const allPagesList)
+              , constField "title" blogTitle
+              , constField "site_desc" siteDesc
+              , defaultContext
+              ]
 
       pandocCompiler
         >>= loadAndApplyTemplate "templates/page.html" defaultContext
@@ -48,12 +51,14 @@ main = hakyll $ do
     compile $ do
       posts <- recentFirst =<< loadAll "posts/*"
       let archiveCtx =
-            listField "posts" postCtx (return posts)
-              `mappend` field "recent_posts" (const recentPostList)
-              `mappend` field "all_pages" (const allPagesList)
-              `mappend` constField "title" "Archives"
-              `mappend` constField "site_desc" siteDesc
-              `mappend` defaultContext
+            mconcat
+              [ listField "posts" postCtx (return posts)
+              , field "recent_posts" (const recentPostList)
+              , field "all_pages" (const allPagesList)
+              , constField "title" "Archives"
+              , constField "site_desc" siteDesc
+              , defaultContext
+              ]
 
       makeItem ""
         >>= loadAndApplyTemplate "templates/archive.html" archiveCtx
@@ -65,12 +70,14 @@ main = hakyll $ do
     compile $ do
       posts <- recentFirst =<< loadAll "posts/*"
       let indexCtx =
-            listField "posts" postCtx (return posts)
-              `mappend` field "recent_posts" (const recentPostList)
-              `mappend` field "all_pages" (const allPagesList)
-              `mappend` constField "title" blogTitle
-              `mappend` constField "site_desc" siteDesc
-              `mappend` defaultContext
+            mconcat
+              [ listField "posts" postCtx (return posts)
+              , field "recent_posts" (const recentPostList)
+              , field "all_pages" (const allPagesList)
+              , constField "title" blogTitle
+              , constField "site_desc" siteDesc
+              , defaultContext
+              ]
 
       getResourceBody
         >>= applyAsTemplate indexCtx
@@ -83,9 +90,11 @@ main = hakyll $ do
 -- Metadata
 postCtx :: Context String
 postCtx =
-  dateField "date" "%B %e, %Y"
-    `mappend` constField "site_desc" siteDesc
-    `mappend` defaultContext
+  mconcat
+    [ dateField "date" "%B %e, %Y"
+    , constField "site_desc" siteDesc
+    , defaultContext
+    ]
 
 blogTitle :: String
 blogTitle = "Neil’s Blog"
