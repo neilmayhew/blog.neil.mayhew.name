@@ -20,6 +20,7 @@ main = hakyll $ do
         compile $ do
             let pageCtx =
                     field "recent_posts" (\_ -> recentPostList) `mappend`
+                    field "all_pages" (\_ -> allPagesList) `mappend`
                     postCtx
 
             pandocCompiler
@@ -32,6 +33,7 @@ main = hakyll $ do
         compile $ do
             let pagesCtx =
                     field "recent_posts" (\_ -> recentPostList) `mappend`
+                    field "all_pages" (\_ -> allPagesList) `mappend`
                     constField "title" blogTitle               `mappend`
                     constField "site_desc" siteDesc          `mappend`
                     defaultContext
@@ -48,6 +50,7 @@ main = hakyll $ do
             let archiveCtx =
                     listField "posts" postCtx (return posts) `mappend`
                     field "recent_posts" (\_ -> recentPostList) `mappend`
+                    field "all_pages" (\_ -> allPagesList) `mappend`
                     constField "title" "Archives"            `mappend`
                     constField "site_desc" siteDesc          `mappend`
                     defaultContext
@@ -63,8 +66,9 @@ main = hakyll $ do
         compile $ do
             posts <- recentFirst =<< loadAll "posts/*"
             let indexCtx =
-                    field "recent_posts" (\_ -> recentPostList) `mappend`
                     listField "posts" postCtx (return posts) `mappend`
+                    field "recent_posts" (\_ -> recentPostList) `mappend`
+                    field "all_pages" (\_ -> allPagesList) `mappend`
                     constField "title" blogTitle            `mappend`
                     constField "site_desc" siteDesc          `mappend`
                     defaultContext
@@ -90,6 +94,20 @@ blogTitle = "Neil’s Blog"
 
 siteDesc :: String
 siteDesc = "An occasional glimpse into my world"
+
+--------------------------------------------------------------------------------
+-- Pages
+allPages :: Compiler [Item String]
+allPages = do
+    identifiers <- getMatches "pages/*"
+    return [Item identifier "" | identifier <- identifiers]
+
+allPagesList :: Compiler String
+allPagesList = do
+    pages   <- allPages
+    itemTpl <- loadBody "templates/listitem.html"
+    list    <- applyTemplateList itemTpl defaultContext pages
+    return list
 
 --------------------------------------------------------------------------------
 -- Recent Posts
