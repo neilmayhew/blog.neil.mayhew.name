@@ -19,8 +19,8 @@ main = hakyll $ do
         route   $ setExtension "html"
         compile $ do
             let pageCtx =
-                    field "recent_posts" (\_ -> recentPostList) `mappend`
-                    field "all_pages" (\_ -> allPagesList) `mappend`
+                    field "recent_posts" (const recentPostList) `mappend`
+                    field "all_pages" (const allPagesList) `mappend`
                     postCtx
 
             pandocCompiler
@@ -32,8 +32,8 @@ main = hakyll $ do
         route   $ setExtension "html"
         compile $ do
             let pagesCtx =
-                    field "recent_posts" (\_ -> recentPostList) `mappend`
-                    field "all_pages" (\_ -> allPagesList) `mappend`
+                    field "recent_posts" (const recentPostList) `mappend`
+                    field "all_pages" (const allPagesList) `mappend`
                     constField "title" blogTitle               `mappend`
                     constField "site_desc" siteDesc          `mappend`
                     defaultContext
@@ -49,8 +49,8 @@ main = hakyll $ do
             posts <- recentFirst =<< loadAll "posts/*"
             let archiveCtx =
                     listField "posts" postCtx (return posts) `mappend`
-                    field "recent_posts" (\_ -> recentPostList) `mappend`
-                    field "all_pages" (\_ -> allPagesList) `mappend`
+                    field "recent_posts" (const recentPostList) `mappend`
+                    field "all_pages" (const allPagesList) `mappend`
                     constField "title" "Archives"            `mappend`
                     constField "site_desc" siteDesc          `mappend`
                     defaultContext
@@ -67,8 +67,8 @@ main = hakyll $ do
             posts <- recentFirst =<< loadAll "posts/*"
             let indexCtx =
                     listField "posts" postCtx (return posts) `mappend`
-                    field "recent_posts" (\_ -> recentPostList) `mappend`
-                    field "all_pages" (\_ -> allPagesList) `mappend`
+                    field "recent_posts" (const recentPostList) `mappend`
+                    field "all_pages" (const allPagesList) `mappend`
                     constField "title" blogTitle            `mappend`
                     constField "site_desc" siteDesc          `mappend`
                     defaultContext
@@ -106,8 +106,7 @@ allPagesList :: Compiler String
 allPagesList = do
     pages   <- allPages
     itemTpl <- loadBody "templates/listitem.html"
-    list    <- applyTemplateList itemTpl defaultContext pages
-    return list
+    applyTemplateList itemTpl defaultContext pages
 
 --------------------------------------------------------------------------------
 -- Recent Posts
@@ -120,5 +119,4 @@ recentPostList :: Compiler String
 recentPostList = do
     posts   <- fmap (take 10) . recentFirst =<< recentPosts
     itemTpl <- loadBody "templates/listitem.html"
-    list    <- applyTemplateList itemTpl defaultContext posts
-    return list
+    applyTemplateList itemTpl defaultContext posts
