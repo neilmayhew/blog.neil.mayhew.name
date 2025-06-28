@@ -1,11 +1,20 @@
-name:               blog-neil-mayhew-name
-version:            0.1.0.0
-build-type:         Simple
-cabal-version:      >= 1.10
+cabal-version: 3.8
+name: blog-neil-mayhew-name
+version: 0.1.0.0
+build-type: Simple
 
 executable site
-  main-is:          site.hs
-  build-depends:    base == 4.*
-                  , hakyll == 4.16.*
-  ghc-options:      -Wall -Wcompat -Werror -threaded -rtsopts -with-rtsopts=-N
+  main-is: site.hs
+  build-depends:
+    base ==4.*,
+    hakyll ==4.16.*,
+
+  ghc-options:
+    -Wall
+    -Wcompat
+    -Werror
+    -threaded
+    -rtsopts
+    -with-rtsopts=-N
+
   default-language: Haskell2010
