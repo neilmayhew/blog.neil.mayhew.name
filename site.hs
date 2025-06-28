@@ -1,93 +1,91 @@
 --------------------------------------------------------------------------------
 {-# LANGUAGE OverloadedStrings #-}
-import           Data.Monoid (mappend)
-import           Hakyll
 
+import Data.Monoid (mappend)
+import Hakyll
 
 --------------------------------------------------------------------------------
 main :: IO ()
 main = hakyll $ do
-    match "images/*" $ do
-        route   idRoute
-        compile copyFileCompiler
+  match "images/*" $ do
+    route idRoute
+    compile copyFileCompiler
 
-    match "css/*" $ do
-        route   idRoute
-        compile compressCssCompiler
+  match "css/*" $ do
+    route idRoute
+    compile compressCssCompiler
 
-    match "posts/*" $ do
-        route   $ setExtension "html"
-        compile $ do
-            let pageCtx =
-                    field "recent_posts" (const recentPostList) `mappend`
-                    field "all_pages" (const allPagesList) `mappend`
-                    postCtx
+  match "posts/*" $ do
+    route $ setExtension "html"
+    compile $ do
+      let pageCtx =
+            field "recent_posts" (const recentPostList)
+              `mappend` field "all_pages" (const allPagesList)
+              `mappend` postCtx
 
-            pandocCompiler
-              >>= loadAndApplyTemplate "templates/post.html"    postCtx
-              >>= loadAndApplyTemplate "templates/default.html" pageCtx
-              >>= relativizeUrls
+      pandocCompiler
+        >>= loadAndApplyTemplate "templates/post.html" postCtx
+        >>= loadAndApplyTemplate "templates/default.html" pageCtx
+        >>= relativizeUrls
 
-    match "pages/*" $ do
-        route   $ setExtension "html"
-        compile $ do
-            let pagesCtx =
-                    field "recent_posts" (const recentPostList) `mappend`
-                    field "all_pages" (const allPagesList) `mappend`
-                    constField "title" blogTitle               `mappend`
-                    constField "site_desc" siteDesc          `mappend`
-                    defaultContext
+  match "pages/*" $ do
+    route $ setExtension "html"
+    compile $ do
+      let pagesCtx =
+            field "recent_posts" (const recentPostList)
+              `mappend` field "all_pages" (const allPagesList)
+              `mappend` constField "title" blogTitle
+              `mappend` constField "site_desc" siteDesc
+              `mappend` defaultContext
 
-            pandocCompiler
-                >>= loadAndApplyTemplate "templates/page.html" defaultContext
-                >>= loadAndApplyTemplate "templates/default.html" pagesCtx
-                >>= relativizeUrls
+      pandocCompiler
+        >>= loadAndApplyTemplate "templates/page.html" defaultContext
+        >>= loadAndApplyTemplate "templates/default.html" pagesCtx
+        >>= relativizeUrls
 
-    create ["archive.html"] $ do
-        route idRoute
-        compile $ do
-            posts <- recentFirst =<< loadAll "posts/*"
-            let archiveCtx =
-                    listField "posts" postCtx (return posts) `mappend`
-                    field "recent_posts" (const recentPostList) `mappend`
-                    field "all_pages" (const allPagesList) `mappend`
-                    constField "title" "Archives"            `mappend`
-                    constField "site_desc" siteDesc          `mappend`
-                    defaultContext
+  create ["archive.html"] $ do
+    route idRoute
+    compile $ do
+      posts <- recentFirst =<< loadAll "posts/*"
+      let archiveCtx =
+            listField "posts" postCtx (return posts)
+              `mappend` field "recent_posts" (const recentPostList)
+              `mappend` field "all_pages" (const allPagesList)
+              `mappend` constField "title" "Archives"
+              `mappend` constField "site_desc" siteDesc
+              `mappend` defaultContext
 
-            makeItem ""
-                >>= loadAndApplyTemplate "templates/archive.html" archiveCtx
-                >>= loadAndApplyTemplate "templates/default.html" archiveCtx
-                >>= relativizeUrls
+      makeItem ""
+        >>= loadAndApplyTemplate "templates/archive.html" archiveCtx
+        >>= loadAndApplyTemplate "templates/default.html" archiveCtx
+        >>= relativizeUrls
 
+  match "index.html" $ do
+    route idRoute
+    compile $ do
+      posts <- recentFirst =<< loadAll "posts/*"
+      let indexCtx =
+            listField "posts" postCtx (return posts)
+              `mappend` field "recent_posts" (const recentPostList)
+              `mappend` field "all_pages" (const allPagesList)
+              `mappend` constField "title" blogTitle
+              `mappend` constField "site_desc" siteDesc
+              `mappend` defaultContext
 
-    match "index.html" $ do
-        route idRoute
-        compile $ do
-            posts <- recentFirst =<< loadAll "posts/*"
-            let indexCtx =
-                    listField "posts" postCtx (return posts) `mappend`
-                    field "recent_posts" (const recentPostList) `mappend`
-                    field "all_pages" (const allPagesList) `mappend`
-                    constField "title" blogTitle            `mappend`
-                    constField "site_desc" siteDesc          `mappend`
-                    defaultContext
+      getResourceBody
+        >>= applyAsTemplate indexCtx
+        >>= loadAndApplyTemplate "templates/default.html" indexCtx
+        >>= relativizeUrls
 
-            getResourceBody
-                >>= applyAsTemplate indexCtx
-                >>= loadAndApplyTemplate "templates/default.html" indexCtx
-                >>= relativizeUrls
-
-    match "templates/*" $ compile templateBodyCompiler
-
+  match "templates/*" $ compile templateBodyCompiler
 
 --------------------------------------------------------------------------------
 -- Metadata
 postCtx :: Context String
 postCtx =
-    dateField "date" "%B %e, %Y" `mappend`
-    constField "site_desc" siteDesc `mappend`
-    defaultContext
+  dateField "date" "%B %e, %Y"
+    `mappend` constField "site_desc" siteDesc
+    `mappend` defaultContext
 
 blogTitle :: String
 blogTitle = "Neil’s Blog"
@@ -99,24 +97,24 @@ siteDesc = "An occasional glimpse into my world"
 -- Pages
 allPages :: Compiler [Item String]
 allPages = do
-    identifiers <- getMatches "pages/*"
-    return [Item identifier "" | identifier <- identifiers]
+  identifiers <- getMatches "pages/*"
+  return [Item identifier "" | identifier <- identifiers]
 
 allPagesList :: Compiler String
 allPagesList = do
-    pages   <- allPages
-    itemTpl <- loadBody "templates/listitem.html"
-    applyTemplateList itemTpl defaultContext pages
+  pages <- allPages
+  itemTpl <- loadBody "templates/listitem.html"
+  applyTemplateList itemTpl defaultContext pages
 
 --------------------------------------------------------------------------------
 -- Recent Posts
 recentPosts :: Compiler [Item String]
 recentPosts = do
-    identifiers <- getMatches "posts/*"
-    return [Item identifier "" | identifier <- identifiers]
+  identifiers <- getMatches "posts/*"
+  return [Item identifier "" | identifier <- identifiers]
 
 recentPostList :: Compiler String
 recentPostList = do
-    posts   <- fmap (take 10) . recentFirst =<< recentPosts
-    itemTpl <- loadBody "templates/listitem.html"
-    applyTemplateList itemTpl defaultContext posts
+  posts <- fmap (take 10) . recentFirst =<< recentPosts
+  itemTpl <- loadBody "templates/listitem.html"
+  applyTemplateList itemTpl defaultContext posts
