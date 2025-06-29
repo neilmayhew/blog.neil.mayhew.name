@@ -5,7 +5,7 @@ date: 2018-05-10 18:18:00 -0600
 ---
 I was recently given a Haskell brain-teaser about deleting the largest element from a list. As you can imagine, it's effectively a one-liner in Haskell:
 
-```haskell
+```haskell {.numberLines}
 deleteMaximum [] = []
 deleteMaximum xs = delete (maximum xs) xs
 ```
@@ -26,7 +26,7 @@ If you have to remove all the tallest people instead of just the first, you need
 
 Here's what this algorithm looks like in Haskell:
 
-```haskell
+```haskell {.numberLines}
 deleteMaximum (x:xs) = go x xs where
     go m (y:ys)
         | m < y     = m : go y ys
@@ -43,7 +43,7 @@ To verify the correctness of the second implementation, I used Haskell's QuickCh
 
 Testing in the interactive interpreter (`ghci`) looks like this:
 
-```haskell
+```haskell {.numberLines}
 > compareWithModel :: [Int] -> Bool
 > compareWithModel xs = sort (deleteMaximumModel xs) == sort (deleteMaximum xs)
 > quickCheck compareWithModel
@@ -54,7 +54,7 @@ Note that you can also specify a maximum list size and a number of tests to try.
 
 I had to include a type annotation for `compareWithModel` because `deleteMaximum` is actually generic, and `quickCheck` needs a concrete type to use when it generates random data. It's generic in that it will work for any element type that has a less-than operator (and in Haskell, that means it has to be a member of the typeclass `Ord`). However, it would be easy to add a version called `deleteMaximumBy` that takes an additional parameter specifying a comparison function, and to define the basic one in terms of the more general one. That way, the list could contain objects of type `Person` and you could define maximum according to various criteria (such as height, age or salary). For example,
 
-```haskell
+```haskell {.numberLines}
 deleteMaximumBy (comparing personAge) people
 ```
 
