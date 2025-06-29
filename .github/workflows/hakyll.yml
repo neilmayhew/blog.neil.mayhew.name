@@ -31,8 +31,17 @@ jobs:
       with:
         nix_path: nixpkgs=channel:nixos-unstable
 
-    - name: Build
-      run: nix-build shell.nix -o _site
+    - name: Set up cachix
+      uses: cachix/cachix-action@v16
+      with:
+        name: neil-mayhew
+        authToken: '${{ secrets.CACHIX_AUTH_TOKEN }}'
+
+    - name: Build generator
+      run: nix-build shell.nix -A builder | cachix push neil-mayhew
+
+    - name: Build site
+      run: nix-build shell.nix -A site -o _site
 
     - name: Upload artifact
       uses: actions/upload-pages-artifact@v3

@@ -13,4 +13,4 @@ let
 
 in
 
-  if pkgs.lib.inNixShell then builder.env else site
+  if pkgs.lib.inNixShell then builder.env else { inherit builder site; }
