@@ -507,11 +507,14 @@ blockquote {
 	font-size: 1.125rem;
 	font-style: italic;
 	line-height: 1.7;
-	margin: 0;
 	overflow: hidden;
-	padding: 0;
-	padding-left: 1em;
-	border-left: 3px solid #a8c8a8;
+	padding: 0 0 0 1em;
+	margin: 0 0 1.5em -1.175em;
+	border-left: 0.175em solid #88a9d5;
+}
+
+blockquote > p:last-child {
+	margin-bottom: 0;
 }
 
 blockquote cite {
