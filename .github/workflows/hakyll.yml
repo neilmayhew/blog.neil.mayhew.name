@@ -38,10 +38,10 @@ jobs:
         authToken: '${{ secrets.CACHIX_AUTH_TOKEN }}'
 
     - name: Build generator
-      run: nix-build shell.nix -A builder | cachix push neil-mayhew
+      run: nix build --no-link --print-out-paths | cachix push neil-mayhew
 
     - name: Build site
-      run: nix-build shell.nix -A site -o _site
+      run: nix build .#site -o _site
 
     - name: Upload artifact
       uses: actions/upload-pages-artifact@v3

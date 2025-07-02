@@ -10,4 +10,6 @@ mkDerivation {
   description = "A Haskyll-based builder for https://blog.neil.mayhew.name";
   license = "MIT-0";
   mainProgram = "site";
+  passthru = { exePath = "/bin/site"; };
+  maintainers = [ lib.maintainers.neilmayhew ];
 }
