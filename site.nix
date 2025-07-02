@@ -2,8 +2,7 @@
 
 stdenv.mkDerivation {
 
-  pname = "blog.neil.mayhew.name";
-  version = "1.0";
+  name = "blog.neil.mayhew.name";
 
   src = lib.cleanSource ./.;
 
@@ -18,7 +17,7 @@ stdenv.mkDerivation {
   meta = with lib; {
     homepage = "https://blog.neil.mayhew.name/";
     description = "An occasional glimpse into my world";
-    license = licenses.gpl3;
+    license = licenses.cc-by-sa-40;
     maintainers = with maintainers; [ neilmayhew ];
   };
 }
