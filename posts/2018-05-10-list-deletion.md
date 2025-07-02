@@ -35,11 +35,11 @@ deleteMaximum (x:xs) = go x xs where
 deleteMaximum _ = []
 ```
 
-This uses a nested helper function called `go`, which also uses case enumeration but using 'guards' (boolean conditions). The `:` operator is for prepending an element to a list (aka 'cons' in traditional Lisp terminology) and is also used for pattern matching and 'deconstruction' whereby parts of the input parameters are assigned to separate variables. So `(x:xs)` puts the first element ('head') of the list into `x` and the rest of the list ('tail') into `xs`. If the list is empty, it won't match the pattern and a different case will be used. Putting this case first increases performance slightly. Using `_` as a variable name is a placeholder for an unused value. Function application has higher precedence than operators like `:`.
+This uses a nested helper function called `go`, which also uses case enumeration but with 'guards' (boolean conditions). The `:` operator is for prepending an element to a list (aka 'cons' in traditional Lisp terminology) and is also used for pattern matching and 'deconstruction' whereby parts of the input parameters are assigned to separate variables. So `(x:xs)` puts the first element ('head') of the list into `x` and the rest of the list ('tail') into `xs`. If the list is empty, it won't match the pattern and a different case will be used. Putting this case first increases performance slightly. Using `_` as a variable name is a placeholder for an unused value. Function application has higher precedence than operators like `:`.
 
 Note that this implementation is also more efficient even for finite lists because it makes a single pass over the list.
 
-To verify the correctness of the second implementation, I used Haskell's QuickCheck library to generate random inputs and compare the results against the first implementation (which I renamed `deleteMaximumModel`). This won't work for infinite lists, of course, but if it always works for lists up to 10,000 elements I feel fairly confident it's correct :-) . You do of course have to sort the two outputs in order to establish equality of the results, since the infinite implementation is reordering the list.
+To verify the correctness of the second implementation, I used Haskell's `QuickCheck` library to generate random inputs and compare the results against the first implementation (which I renamed `deleteMaximumModel`). This won't work for infinite lists, of course, but if it always works for lists up to 10,000 elements I feel fairly confident it's correct :-). You do of course have to sort the two outputs in order to establish equality of the results, since the infinite implementation is reordering the list.
 
 Testing in the interactive interpreter (`ghci`) looks like this:
 
