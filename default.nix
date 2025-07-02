@@ -6,6 +6,8 @@ mkDerivation {
   isLibrary = false;
   isExecutable = true;
   executableHaskellDepends = [ base hakyll ];
-  license = "unknown";
+  homepage = "https://github.com/neilmayhew/blog.neil.mayhew.name/";
+  description = "A Haskyll-based builder for https://blog.neil.mayhew.name";
+  license = "MIT-0";
   mainProgram = "site";
 }

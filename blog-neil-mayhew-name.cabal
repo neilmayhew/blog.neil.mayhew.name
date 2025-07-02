@@ -1,7 +1,12 @@
 cabal-version: 3.8
 name: blog-neil-mayhew-name
 version: 0.1.0.0
-build-type: Simple
+license: MIT-0
+copyright: 2025 Neil Mayhew
+author: Neil Mayhew
+maintainer: neil@neil.mayhew.name
+homepage: https://github.com/neilmayhew/blog.neil.mayhew.name/
+synopsis: A Haskyll-based builder for https://blog.neil.mayhew.name
 
 executable site
   main-is: site.hs
