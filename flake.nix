@@ -12,7 +12,7 @@
         with self.packages.${system};
         {
           packages = {
-            default = haskellPackages.callPackage ./default.nix { };
+            default = haskell.lib.justStaticExecutables (pkgsStatic.haskellPackages.callPackage ./default.nix { });
             site = callPackage ./site.nix { builder = default; };
           };
           apps = {
