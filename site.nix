@@ -1,23 +1,28 @@
-{ stdenv, lib, glibcLocales, builder }:
+{ lib, busybox, glibcLocalesUtf8, builder, system }:
 
-stdenv.mkDerivation {
+let
+  src = lib.cleanSource ./.;
+in
+
+derivation {
 
   name = "blog.neil.mayhew.name";
 
-  src = lib.cleanSource ./.;
+  builder = "${busybox}/bin/sh";
 
-  nativeBuildInputs = [ glibcLocales ];
+  args = [
+    "-ec"
+    ''
+      export LOCALE_ARCHIVE=${glibcLocalesUtf8}/lib/locale/locale-archive
+      export LANG=en_US.UTF-8
+      PATH=${busybox}/bin:$PATH
+      cp -r ${src} src
+      chmod +w src
+      cd src
+      ${builder}/bin/site rebuild
+      mv _site $out
+    ''
+  ];
 
-  installPhase = ''
-    export LANG=en_US.UTF-8
-    ${builder}/bin/site rebuild
-    mv _site $out
-  '';
-
-  meta = with lib; {
-    homepage = "https://blog.neil.mayhew.name/";
-    description = "An occasional glimpse into my world";
-    license = licenses.cc-by-sa-40;
-    maintainers = with maintainers; [ neilmayhew ];
-  };
+  inherit system;
 }
