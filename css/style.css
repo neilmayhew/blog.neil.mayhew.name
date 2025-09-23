@@ -1324,7 +1324,7 @@ a:hover .nav-title,
 }
 
 .navigation-top .wrap {
-	max-width: 1000px;
+	max-width: 1100px;
 	padding: 0;
 }
 
@@ -3354,20 +3354,20 @@ p > object:only-child {
 	/* Layout */
 
 	.wrap {
-		max-width: 1000px;
+		max-width: 1100px;
 		padding-left: 3em;
 		padding-right: 3em;
 	}
 
 	.has-sidebar:not(.error404) #primary {
 		float: left;
-		width: 58%;
+		width: 68%;
 	}
 
 	.has-sidebar #secondary {
 		float: right;
 		padding-top: 0;
-		width: 36%;
+		width: 26%;
 	}
 
 	.error404 #primary {
@@ -3463,7 +3463,7 @@ p > object:only-child {
 	}
 
 	.navigation-top .wrap {
-		max-width: 1000px;
+		max-width: 1100px;
 		/* The font size is 14px here and we need 50px padding in ems */
 		padding: 0.75em 3.4166666666667em;
 	}
@@ -3744,12 +3744,12 @@ p > object:only-child {
 
 	.page-two-column .panel-content .entry-header {
 		float: left;
-		width: 36%;
+		width: 26%;
 	}
 
 	.page-two-column .panel-content .entry-content {
 		float: right;
-		width: 58%;
+		width: 68%;
 	}
 
 	/* Front Page - Recent Posts */
@@ -3757,7 +3757,7 @@ p > object:only-child {
 	.page-two-column .panel-content .recent-posts {
 		clear: right;
 		float: right;
-		width: 58%;
+		width: 68%;
 	}
 
 	.panel-content .recent-posts article {
@@ -3828,7 +3828,7 @@ p > object:only-child {
 	body.page-two-column:not(.archive) #primary .entry-header,
 	body.page-two-column.archive:not(.has-sidebar) #primary .page-header {
 		float: left;
-		width: 36%;
+		width: 26%;
 	}
 
 	.blog:not(.has-sidebar) #primary article,
@@ -3839,7 +3839,7 @@ p > object:only-child {
 	body.page-two-column:not(.archive) #primary .entry-content,
 	body.page-two-column #comments {
 		float: right;
-		width: 58%;
+		width: 68%;
 	}
 
 	.blog .site-main > article,
@@ -3851,7 +3851,7 @@ p > object:only-child {
 	.navigation.pagination {
 		clear: both;
 		float: right;
-		width: 58%;
+		width: 68%;
 	}
 
 	.has-sidebar .navigation.pagination,
@@ -3928,7 +3928,7 @@ p > object:only-child {
 	.archive:not(.has-sidebar) .entry-content blockquote.alignright,
 	.page-two-column .entry-content blockquote.alignright {
 		margin-right: 0;
-		width: 36%;
+		width: 26%;
 	}
 
 	/* Post formats */
@@ -4016,25 +4016,25 @@ p > object:only-child {
 
 	.site-footer .widget-column.footer-widget-1 {
 		float: left;
-		width: 36%;
+		width: 26%;
 	}
 
 	.site-footer .widget-column.footer-widget-2 {
 		float: right;
-		width: 58%;
+		width: 68%;
 	}
 
 	.social-navigation {
 		clear: left;
 		float: left;
 		margin-bottom: 0;
-		width: 36%;
+		width: 26%;
 	}
 
 	.site-info {
 		float: left;
 		padding: 0.7em 0 0;
-		width: 58%;
+		width: 68%;
 	}
 
 	.social-navigation + .site-info {
