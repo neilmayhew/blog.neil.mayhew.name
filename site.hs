@@ -18,7 +18,7 @@ main = hakyll $ do
     route idRoute
     compile copyFileCompiler
 
-  match "posts/*" $ do
+  match ("posts/*" .||. "drafts/*") $ do
     route $ setExtension "html"
     compile $ do
       let pageCtx =
