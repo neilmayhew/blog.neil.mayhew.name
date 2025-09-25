@@ -2,6 +2,7 @@
 {-# LANGUAGE OverloadedStrings #-}
 
 import Hakyll
+import Text.Pandoc.Options (HTMLMathMethod (MathML), WriterOptions (writerHTMLMathMethod))
 
 --------------------------------------------------------------------------------
 main :: IO ()
@@ -28,7 +29,7 @@ main = hakyll $ do
               , postCtx
               ]
 
-      pandocCompiler
+      pandocCompiler'
         >>= loadAndApplyTemplate "templates/post.html" postCtx
         >>= loadAndApplyTemplate "templates/default.html" pageCtx
         >>= relativizeUrls
@@ -45,7 +46,7 @@ main = hakyll $ do
               , defaultContext
               ]
 
-      pandocCompiler
+      pandocCompiler'
         >>= loadAndApplyTemplate "templates/page.html" defaultContext
         >>= loadAndApplyTemplate "templates/default.html" pagesCtx
         >>= relativizeUrls
@@ -131,3 +132,10 @@ recentPostList = do
   posts <- fmap (take 10) . recentFirst =<< recentPosts
   itemTpl <- loadBody "templates/listitem.html"
   applyTemplateList itemTpl defaultContext posts
+
+--------------------------------------------------------------------------------
+pandocCompiler' :: Compiler (Item String)
+pandocCompiler' =
+  pandocCompilerWith
+    defaultHakyllReaderOptions
+    defaultHakyllWriterOptions{writerHTMLMathMethod = MathML}

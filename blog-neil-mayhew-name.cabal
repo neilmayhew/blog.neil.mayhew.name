@@ -13,6 +13,7 @@ executable site
   build-depends:
     base ==4.*,
     hakyll ==4.16.*,
+    pandoc ==3.6,
 
   ghc-options:
     -Wall
