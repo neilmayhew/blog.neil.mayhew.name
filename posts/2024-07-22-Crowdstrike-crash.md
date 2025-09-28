@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Jumping to Conclusions
-date: 2024-07-22 23:06:05 -06:00
+date: 2024-07-22 23:06:05-06:00
 ---
 Attributing the [Crowdstrike crash][1] to a "null pointer error" turns out to have been a little simplistic[^1].
 

@@ -1,7 +1,7 @@
 ---
 layout: post
 title: I once was lost but now am found
-date: 2008-06-14 19:03:00 -0600
+date: 2008-06-14 19:03:00-06:00
 ---
 Today I found my silver cuff-links. These were a present from my uncle for my 21st birthday, and very precious to me. I thought they were gone forever.
 

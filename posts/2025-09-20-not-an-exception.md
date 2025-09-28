@@ -1,7 +1,7 @@
 ---
 layout: post
 title: When Is An Exception Not An Exception?
-date: 2025-09-20 20:54:06 -0600
+date: 2025-09-20 20:54:06-06:00
 ---
 As a child, I remember being irritated by the tired old joke, "When is a door not a door? When it's ajar!" However, I recently found myself asking much the same sort of question in a Haskell context — "When is an exception not an exception?" — and the answer was surprising.
 

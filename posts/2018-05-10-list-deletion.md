@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Deleting the largest element from a list
-date: 2018-05-10 18:18:00 -0600
+date: 2018-05-10 18:18:00-06:00
 ---
 I was recently given a Haskell brain-teaser about deleting the largest element from a list. As you can imagine, it's effectively a one-liner in Haskell:
 

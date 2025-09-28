@@ -1,7 +1,7 @@
 ---
 layout: post
 title: A Response to “Coding is Harder Than You Think”
-date: 2015-12-09 21:24:00 -0700
+date: 2015-12-09 21:24:00-07:00
 ---
 Over the many years I’ve been programming, I’ve given several very smart and motivated people with no knowledge of programming the chance to join my programming team and learn on the job. Very few of those have worked out well, and in most cases the process has been a net drain on the team. I’m now a lot more careful about giving those opportunities.
 

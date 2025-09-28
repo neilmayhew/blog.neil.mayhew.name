@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Getting Your First Haskell Job
-date: 2023-11-06 15:37:23 -0600
+date: 2023-11-06 15:37:23-06:00
 ---
 
 Someone asked,
