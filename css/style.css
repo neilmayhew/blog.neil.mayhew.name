@@ -1568,7 +1568,7 @@ body {
 /* Site branding */
 
 .site-branding {
-	font-family: "Libre Franklin", "Helvetica Neue", helvetica, arial, sans-serif;
+	font-family: "Open Sans", "Helvetica Neue", helvetica, arial, sans-serif;
 	padding: 1em 0;
 	position: relative;
 	-webkit-transition: margin-bottom 0.2s;
@@ -1591,7 +1591,7 @@ body {
 	clear: none;
 	font-size: 24px;
 	font-size: 1.5rem;
-	font-weight: 800;
+	font-weight: 700;
 	line-height: 1.25;
 	letter-spacing: 0.08em;
 	margin: 0;
@@ -1921,6 +1921,8 @@ body.page:not(.twentyseventeen-front-page) .entry-title {
 }
 
 .entry-title a {
+	font-family: "Open Sans", "Helvetica Neue", helvetica, arial, sans-serif;
+	font-weight: bold;
 	color: #333;
 	text-decoration: none;
 	margin-left: -2px;
