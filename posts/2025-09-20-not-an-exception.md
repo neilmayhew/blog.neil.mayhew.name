@@ -55,7 +55,7 @@ The exceptions thrown from different locations in the code have different callst
 
 However, the callstack doesn't participate in the pattern-matching, so all three exceptions succeed in matching the pattern.
 
-I referred to the callstack as "hidden", and although functions can have implicit arguments constructors can't have implicit fields. So how can the callstack be "hidden"?
+I referred to the callstack as "hidden" and, although functions can have implicit arguments, constructors can't have implicit fields. So how can the callstack be "hidden"?
 
 The answer, as my friend and colleague [Alexey Kuleshevich](https://github.com/lehins) pointed out, is that `ErrorCall` is actually a `pattern` synonym and the underlying constructor is `ErrorCallWithLocation`:
 
