@@ -418,8 +418,8 @@ select,
 textarea {
 	color: #333;
 	font-family: Merriweather, Georgia, serif;
-	font-size: 18px;
-	font-size: 1.2rem;
+	font-size: 16px;
+	font-size: 1rem;
 	font-weight: 400;
 	line-height: 1.66;
 }
@@ -503,14 +503,18 @@ i {
 
 blockquote {
 	color: #666;
-	font-size: 18px;
-	font-size: 1.125rem;
+	font-size: 16px;
+	font-size: 1rem;
 	font-style: italic;
-	line-height: 1.7;
+	line-height: 1.6;
 	overflow: hidden;
 	padding: 0 0 0 1em;
 	margin: 0 0 1.5em -1.175em;
 	border-left: 0.175em solid #88a9d5;
+}
+
+blockquote > p {
+	margin: 0 0 1em;
 }
 
 blockquote > p:last-child {
@@ -3217,8 +3221,8 @@ p > object:only-child {
 	input,
 	select,
 	textarea {
-		font-size: 22px;
-		font-size: 1.2rem;
+		font-size: 16px;
+		font-size: 1rem;
 	}
 
 	h1 {
@@ -3346,9 +3350,9 @@ p > object:only-child {
 	input,
 	select,
 	textarea {
-		font-size: 19px;
-		font-size: 1.2rem;
-		line-height: 1.5;
+		font-size: 16px;
+		font-size: 1rem;
+		line-height: 1.75;
 	}
 
 	.entry-content blockquote.alignleft,
