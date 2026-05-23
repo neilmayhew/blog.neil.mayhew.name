@@ -12,13 +12,16 @@
         with self.packages.${system};
         {
           packages = {
-            default = haskell.lib.justStaticExecutables (pkgsStatic.haskellPackages.callPackage ./default.nix { });
+            static = haskell.lib.justStaticExecutables
+              (pkgsStatic.haskellPackages.callPackage ./default.nix { });
+            dynamic = haskell.lib.justStaticExecutables
+              (haskellPackages.callPackage ./default.nix { });
+            default = static;
             site = callPackage ./site.nix { builder = default; };
           };
-          apps = {
-            default = flake-utils.lib.mkApp { drv = default; };
-          };
           devShells = {
+            dynamic = dynamic.env;
+            static = static.env;
             default = default.env;
           };
         }
